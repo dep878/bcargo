@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+    <h2>Here are all company profiles: </h2>
+    <div>
+        <ul>
+            {% for receipe in object_list %}
+                <li>{{ receipe.title }} {{ receipe.description }} | <a
+   
+                </li>
+            {% empty %}
+                <li>No company yet.</li>
+            {% endfor %}
+
+        </ul>
+        <p>
+            <a href="{% url 'company-add' %}">Добавить организацию</a>
+        </p>
+    </div>
+{% endblock %}

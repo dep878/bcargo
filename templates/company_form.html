@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Card Title</span>
+          <form method="POST">
+                {% csrf_token %}
+          {{ form.as_p }}
+          {{ ingredient_form.as_p }}
+          {{ instruction_form.as_p }}
+        </div>
+        <div class="card-action">
+            {% block actions %}
+            <div class="right-align">
+                {% block formbuttons %}<button class="btn waves-effect waves-light" type="submit"><b>Сохранить</b>
+                                            <i class="material-icons right">send</i>
+                                        </button>
+                {% endblock %}
+                <a class="btn waves-effect waves-light" href=""><b>Назад</b><i class="material-icons right">arrow_back</i></a>
+            </div>
+            {% endblock %}
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

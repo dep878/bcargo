@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+    <h2>Here are all company profiles: </h2>
+    <div>
+        <ul>
+            {% for company in object_list %}
+                <li>{{ company.name }} {{ company.inn }} {{ company.kpp }} {{ company.address }} | <a
+                        href="{% url 'company-update' company.pk %}">Редактировать</a>
+                    <a href="{% url 'company-delete' company.pk %}">Удалить</a>
+                </li>
+            {% empty %}
+                <li>No company yet.</li>
+            {% endfor %}
+
+        </ul>
+        <p>
+            <a href="{% url 'company-add' %}">Добавить организацию</a>
+        </p>
+    </div>
+{% endblock %}

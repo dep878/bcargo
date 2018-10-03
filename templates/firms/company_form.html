@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extrahead %}
+<style type="text/css">
+  @media only screen and (min-width : 601px) {
+      #id_card_type_container {
+          margin-top: 40px;
+          margin-left: 50px;
+      }
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+<div class="row valign change-form">
+    <div class="{% block formclass %}col s12 m8 offset-m2 l8 offset-l2{% endblock %}">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title grey-text text-darken-2">{% block formtitle %}Форма{% endblock %}</span>
+                <div class="row">    
+                    <form class="col s12" method="POST">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                    <!-- <i class="material-icons prefix">search</i> -->
+                                <input id="party" name="party" type="text">
+                                <label for="party">Поиск по названию, ИНН, ОГРН или адресу организации</label>
+                            </div>
+                        </div>
+                    {% csrf_token %}
+                    {{ form }}
+                    {{ phone.management_form }}
+                        {% for form in phone.forms %}
+                        <div class="formset_row">
+                            <label class="col s12" style="padding-left:0px">Номер телефона</label>
+                            {% for field in form.visible_fields %}
+                                {# Include the hidden fields in the form #}
+                                {% if forloop.first %}
+                                    {% for hidden in form.hidden_fields %}
+                                        {{ hidden }}
+                                    {% endfor %}
+                                {% endif %} 
+                                {{ field.errors.as_ul }}
+                                {{ field }}
+                            {% endfor %}
+                            </div>
+                        {% endfor %}
+                </div></div>
+                <div class="card-action">
+                    {% block actions %}
+                    <div class="right-align">
+                        {% block formbuttons %}<button class="btn waves-effect waves-light" type="submit">Сохранить
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                        {% endblock %}
+                        <a class="btn waves-effect waves-light" href="{% url 'company-list' %}"><b>Назад</b><i class="material-icons right">arrow_back</i></a>
+                    </div>
+                    {% endblock %}
+                </div>
+            </div>  
+            </form>
+        </div>
+    </div>
+</div>
+
+            <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@17.10.0/dist/css/suggestions.min.css" type="text/css" rel="stylesheet" />
+            <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@17.10.0/dist/js/jquery.suggestions.min.js"></script>
+            
+            <script src="{% static 'formset/jquery.formset.js' %}"></script>
+            <script type="text/javascript">
+                $('.formset_row').formset({
+                    addCssClass: 'green-text material-icons center  col s1',
+                    deleteCssClass: 'red-text material-icons center col s1',
+                    addText: 'add_circle_outline',
+                    deleteText: 'remove_circle_outline',
+                    prefix: 'phone_set'
+                });
+            </script>
+            <script type="text/javascript">
+                function join(arr /*, separator */) {
+                var separator = arguments.length > 1 ? arguments[1] : ", ";
+                return arr.filter(function(n){return n}).join(separator);
+                }
+        
+                function typeDescription(type) {
+                var TYPES = {
+                    'INDIVIDUAL': 'Индивидуальный предприниматель',
+                    'LEGAL': 'Организация'
+                }
+                return TYPES[type];
+                }
+        
+                function showSuggestion(suggestion) {
+                console.log(suggestion);
+                var data = suggestion.data;
+                if (!data)
+                    return;
+                
+                $("#type").text(
+                    typeDescription(data.type) + " (" + data.type + ")"
+                );
+        
+                if (data.name)
+                    $("#id_name").val(join([data.opf && data.opf.short || "", data.name.short || data.name.full], " "));
+                    $("#id_inn").val(data.inn);
+                    $("#id_kpp").val(data.kpp);
+                
+                if (data.address)
+                    $("#id_address").val(data.address.value);
+                }
+        
+                $("#party").suggestions({
+                token: "5e094e9d15263dce30266bdc1c152dbc67513bfe",
+                type: "PARTY",
+                count: 0,
+                onSelect: showSuggestion
+                });
+            </script>
+
+{% block result %}
+{% endblock %}
+{% endblock %}
