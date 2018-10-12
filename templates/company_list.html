@@ -1,21 +1,71 @@
 {% extends "base.html" %}
 {% block title %}{% endblock %}
 {% block content %}
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-8">
+<div class="table-title">
+<h3>Список организаций</h3>
+</div>
+<table id="example" class="table table-striped table-bordered dt-responsive nowrap mt-2">
+    <thead>
+        <tr>
+            <th  class="text-left">Table Header</th>
+            <th class="text-left" width="150">Table Header</th>
+            <th class="text-left" width="150">Table Header</th>
+            <th class="text-left" width="150">Table Header</th>
+        </tr>
+    </thead>
+    <tbody class="table-hover">
+        {% for receipe in object_list %}
+        <tr>
+            <td class="text-left">{{ receipe.title }}</td>
+            <td class="text-left">{{ receipe.description }}</td>
+            <td class="text-left">Content Goes Here</td>
+            <td class="text-left">Content Goes Here</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div></div></div>
 
-    <h2>Here are all company profiles: </h2>
-    <div>
-        <ul>
-            {% for receipe in object_list %}
-                <li>{{ receipe.title }} {{ receipe.description }} | <a
-   
-                </li>
-            {% empty %}
-                <li>No company yet.</li>
-            {% endfor %}
 
-        </ul>
-        <p>
-            <a href="{% url 'company-add' %}">Добавить организацию</a>
-        </p>
-    </div>
+<div class="mt-5">
+<a class="btn btn-primary" href="/company/add"><i class="fi-plus"></i> Добавить организацию</a>
+</div>
+{% endblock %}
+
+{% block extrajs %}
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "В таблице отсутствуют данные",
+                "info": "Показано с _START_ по _END_ из _TOTAL_ записей",
+                "infoEmpty": "Показано 0 по 0 из 0 записей",
+                "infoFiltered": "(filtered from _MAX_ total entries)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Показывать по _MENU_ записей на странице",
+                "loadingRecords": "Loading...",
+                "processing": "Processing...",
+                "search": "Поиск:",
+                "zeroRecords": "Записей не найдено",
+                "paginate": {
+                    "first": "Первая",
+                    "last": "Последняя",
+                    "next": "След.",
+                    "previous": "Пред."
+                },
+            }
+        });
+    });
+</script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
 {% endblock %}

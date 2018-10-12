@@ -20,5 +20,6 @@ from django.views.generic.base import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('firms.urls')),
+    path('settings/', include('notapp.urls')),
     # path('store/', include('store.urls', namespace='store') ),
 ]

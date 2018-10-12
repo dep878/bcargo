@@ -66,7 +66,7 @@
                 } else {
                     // Otherwise, just insert the remove button as the
                     // last child element of the form's container:
-                    row.append('<a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText +'</a>');
+                    row.append('<div class="input-group-append"><a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText +'</a></div>');
                 }
                 // Check if we're under the minimum number of forms - not to display delete link at rendering
                 if (!showDeleteLinks()){

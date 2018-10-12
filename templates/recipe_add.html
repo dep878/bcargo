@@ -1,62 +1,97 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Multiformset Demo</title>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="{{ STATIC_URL }}static/formset/jquery.formset.js"></script>
-    <!-- <script src="{{ STATIC_URL }}js/jquery.min.js"></script> -->
-    <!-- <script src="{{ STATIC_URL }}js/jquery.formset.js"></script> -->
-    <script type="text/javascript">
-        $(function() {
-            $(".inline.{{ ingredient_form.prefix }}").formset({
-                prefix: "{{ ingredient_form.prefix }}",
-            })
-            $(".inline.{{ instruction_form.prefix }}").formset({
-                prefix: "{{ instruction_form.prefix }}",
-            })
-        })
-    </script>
-</head>
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
 
-<body>
-    <div>
-        <h1>Add Recipe</h1>
-        <form action="." method="post">
-            {% csrf_token %}
-            <div>
-                {{ form.as_p }}
+<title>{% block title %}Multiformset Demo{% endblock %}</title>
+
+{% block content %}
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-12"> -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <b>Добавить организацию</b>
+                </div>
+                <div class="card-body">
+
+                    <form action="." method="post">
+                        {% csrf_token %}
+
+
+                              <div class="form-group">
+                                    <label for="{{ form.title.id_for_label }}" class="has-float-label">
+                                            {{ form.title | add_class:"form-control" }}
+                                      <span>{{ form.title.label }}</span>
+                                    </label>
+                                  </div>
+
+                        <div class="form-group">
+                             <label for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+                             {{ form.description | add_class:"form-control" }}
+                        </div>
+                        <fieldset>
+                            <legend>Recipe Ingredient</legend>
+                            {{ ingredient_form.management_form }}
+                            {{ ingredient_form.non_form_errors }}
+                            {% for form in ingredient_form %}
+                            {{ form.id }}
+                            <div class="form-group inline {{ ingredient_form.prefix }}">
+                                    {{ form.description.errors }}
+                                    <label for="{{ form.description.id_for_label }}" class="has-float-label">
+                                        {{ form.description | add_class:"form-control" }}
+                                        <span>{{ form.description.label }}</span>
+                                    </label>
+                            </div>
+                            <!-- <div class="inline {{ ingredient_form.prefix }}">
+                                {{ form.description.errors }}
+                                {{ form.description.label_tag }}
+                                {{ form.description }}
+                            </div> -->
+                            {% endfor %}
+                        </fieldset>
+                        <fieldset>
+                            <legend>Recipe instruction</legend>
+                            {{ instruction_form.management_form }}
+                            {{ instruction_form.non_form_errors }}
+                            {% for form in instruction_form %}
+                            {{ form.id }}
+                            <div class="inline {{ instruction_form.prefix }}">
+                                {{ form.number.errors }}
+                                {{ form.number.label_tag }}
+                                {{ form.number }}
+                                {{ form.description.errors }}
+                                {{ form.description.label_tag }}
+                                {{ form.description }}
+                            </div>
+                            {% endfor %}
+                        </fieldset>
+                        <input type="submit" value="Сохранить" class="btn btn-primary float-right" />
+                    </form>
+                </div>
             </div>
-            <fieldset>
-                <legend>Recipe Ingredient</legend>
-                {{ ingredient_form.management_form }}
-                {{ ingredient_form.non_form_errors }}
-                {% for form in ingredient_form %}
-                    {{ form.id }}
-                    <div class="inline {{ ingredient_form.prefix }}">
-                        {{ form.description.errors }}
-                        {{ form.description.label_tag }}
-                        {{ form.description }}
-                    </div>
-                {% endfor %}
-            </fieldset>
-            <fieldset>
-                <legend>Recipe instruction</legend>
-                {{ instruction_form.management_form }}
-                {{ instruction_form.non_form_errors }}
-                {% for form in instruction_form %}
-                    {{ form.id }}
-                    <div class="inline {{ instruction_form.prefix }}">
-                        {{ form.number.errors }}
-                        {{ form.number.label_tag }}
-                        {{ form.number }}
-                        {{ form.description.errors }}
-                        {{ form.description.label_tag }}
-                        {{ form.description }}
-                    </div>
-                {% endfor %}
-            </fieldset>
-            <input type="submit" value="Add recipe" class="submit" />
-        </form>
+        <!-- </div>
     </div>
-</body>
-</html>
+</div> -->
+{% endblock %}
+
+{% block extrajs %}
+
+<script src="{% static 'assets/js/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".inline.{{ ingredient_form.prefix }}").formset({
+            addCssClass: 'btn btn-outline-success btn-sm',
+            deleteCssClass: 'btn btn-outline-danger add-form-row',
+            addText: '<i class="fi-plus"></i> Добавить номер',
+            deleteText: '<i class="fi-minus"></i>',
+            formCssClass: 'input-group',
+            prefix: "{{ ingredient_form.prefix }}",
+        })
+        $(".inline.{{ instruction_form.prefix }}").formset({
+            prefix: "{{ instruction_form.prefix }}",
+        })
+    })
+</script>
+
+
+{% endblock %}
