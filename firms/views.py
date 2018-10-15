@@ -7,6 +7,7 @@ from .forms import IngredientFormSet, InstructionFormSet, RecipeForm
 from .models import Recipe
 
 class CompanyList(ListView):
+    template_name = 'company_list.html'
     model = Recipe
 
 class RecipeCreateView(CreateView):
@@ -14,8 +15,8 @@ class RecipeCreateView(CreateView):
     template_name = 'recipe_add.html'
     model = Recipe
     form_class = RecipeForm
-    success_url = 'success/'
-    # success_url = reverse_lazy('company-list')
+    # success_url = 'company-list'
+    success_url = reverse_lazy('company-list')
 
     def get(self, request, *args, **kwargs):
         self.object = None
