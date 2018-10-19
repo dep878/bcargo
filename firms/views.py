@@ -1,10 +1,36 @@
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, CreateView, UpdateView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
+from django_tables2 import RequestConfig, SingleTableView
 
 from .forms import IngredientFormSet, InstructionFormSet, RecipeForm
-from .models import Recipe
+from .models import Recipe, Ingredient, Instruction, IngredientProxy
+from .tables import RecipeTable
+
+class RecipeList(SingleTableView):
+    model = Recipe
+    table_class = RecipeTable
+    template_name = 'company_list.html'
+
+    # def get_queryset(self):
+    #     return Ingredient.objects.distinct('recipe_id')
+    #     # queryset = Ingredient.objects.all()
+        # return IngredientProxy.objects.order_by('recipe_id').values_list('recipe_id', flat=True).distinct()
+        # return IngredientProxy.ingr_objects.all()
+        # .objects.values('description').distinct()
+        # objects.all()
+        # .values('recipe_id')
+        # .filter(id=8)
+        # .all()
+        # return Ingredient.objects.filter(id=8)
+        # r = Recipe.objects.get(id=1)
+        # return r.ingredient_set.all()
+
+    # def recipe(request):
+    #     table = RecipeTable(Ingredient.objects.all())
+    #     RequestConfig(request).configure(table)
+    #     return render(request, 'company_list.html', {'table': table})
 
 class CompanyList(ListView):
     template_name = 'company_list.html'
