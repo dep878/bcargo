@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+
+{% block extrahead %}
+    <!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/1.10.19/sorting/intl.js"></script>
+    <script src="//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{% static 'assets/js/ddv_example_testmodel.js' %}"></script>
+    <script type="text/javascript">
+        var TESTMODEL_LIST_JSON_URL = "{% url 'testmodel_list_json' %}";
+        // translations for datatables
+
+        var dt_language = {
+            "emptyTable":     "{% trans "В таблице отсутствуют данные" %}",
+            "info":           "{% trans "Записи с _START_ до _END_ из _TOTAL_ записей" %}",
+            "infoEmpty":      "{% trans "Записи с 0 до 0 из 0 записей" %}",
+            "infoFiltered":   "{% trans "(отфильтровано из _MAX_ записей)" %}",
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     "{% trans "Показать _MENU_ записей" %}",
+            "loadingRecords": "{% trans "Загрузка записей..." %}",
+            "processing":     "{% trans "Подождите..." %}",
+            "search":         "{% trans "Поиск:" %}",
+            "zeroRecords":    "{% trans "Записи отсутствуют." %}",
+            "paginate": {
+                "first":      "{% trans "Первая" %}",
+                "last":       "{% trans "Последняя" %}",
+                "next":       "{% trans "Следующая" %}",
+                "previous":   "{% trans "Предыдущая" %}"
+            },
+            "aria": {
+                "sortAscending":  "{% trans ": активировать для сортировки столбца по возрастанию" %}",
+                "sortDescending": "{% trans ": активировать для сортировки столбца по убыванию" %}"
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <b>Список организаций</b>
+    </div>
+    <div class="card-body">
+        <table class="datatable table table-striped table-bordered" style="width:100%">
+            <thead>
+                <th>{% trans "Название" %}</th>
+                <th>{% trans "Description" %}</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="mt-5">
+            <a class="btn btn-primary" href="/company/add"><i class="fi-plus"></i> Добавить организацию</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

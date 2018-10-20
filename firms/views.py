@@ -1,10 +1,27 @@
 from django.http import HttpResponseRedirect
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, TemplateView
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
+from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from .forms import IngredientFormSet, InstructionFormSet, RecipeForm
 from .models import Recipe
+
+class RecipeModelList(TemplateView):
+    template_name = 'testmodel_list.html'
+
+
+class RecipeModelListJson(BaseDatatableView):
+    model = Recipe
+    columns = ['title', 'description']
+    order_columns = ['title', 'description']
+
+    # def filter_queryset(self, qs):
+    #     sSearch = self.request.GET.get('sSearch', None)
+    #     if sSearch:
+    #         qs = qs.filter(Q(title__istartswith=sSearch) | Q(description__istartswith=sSearch))
+    #     return qs
+
 
 class CompanyList(ListView):
     template_name = 'company_list.html'
@@ -16,7 +33,7 @@ class RecipeCreateView(CreateView):
     model = Recipe
     form_class = RecipeForm
     # success_url = 'company-list'
-    success_url = reverse_lazy('company-list')
+    success_url = reverse_lazy('testmodel')
 
     def get(self, request, *args, **kwargs):
         self.object = None
