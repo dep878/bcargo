@@ -1,11 +1,16 @@
 {% extends "base.html" %}
-{% load i18n staticfiles %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    Компании и контакты | {{ block.super }}
+{% endblock %}
 
 {% block extrahead %}
     <!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/1.10.19/sorting/intl.js"></script>
     <script src="//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
@@ -40,8 +45,19 @@
     </script>
 {% endblock %}
 
+
+{% block page_title %}Контакты и компании{% endblock %}
+{% block nav_button %}
+<a href="{% url 'company-add' %}">
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>Добавить компанию
+    </button>
+</a>
+{% endblock %}
+
+
 {% block content %}
-<div class="card shadow-sm">
+<div class="card shadow-sm mt-3">
     <div class="card-header bg-primary text-white">
         <b>Список организаций</b>
     </div>
@@ -54,9 +70,6 @@
             <tbody>
             </tbody>
         </table>
-        <div class="mt-5">
-            <a class="btn btn-primary" href="/company/add"><i class="fi-plus"></i> Добавить организацию</a>
-        </div>
     </div>
 </div>
 {% endblock %}

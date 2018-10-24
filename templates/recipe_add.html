@@ -4,20 +4,26 @@
 
 <title>{% block title %}Multiformset Demo{% endblock %}</title>
 
+{% block page_title %}Добавить компанию{% endblock %}
+{% block nav_button %}
+<a href="{% url 'company-add' %}">
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>Добавить компанию
+    </button>
+</a>
+{% endblock %}
+
 {% block content %}
 <!-- <div class="container">
     <div class="row">
         <div class="col-md-12"> -->
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <b>Добавить организацию</b>
+                    <b>Добавить компанию</b>
                 </div>
                 <div class="card-body">
-
                     <form action="." method="post">
                         {% csrf_token %}
-
-
                               <div class="form-group">
                                     <label for="{{ form.title.id_for_label }}" class="has-float-label">
                                             {{ form.title | add_class:"form-control" }}

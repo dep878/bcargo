@@ -4,7 +4,7 @@ from .views import RecipeModelList, RecipeModelListJson
 
 urlpatterns = [
     path('company', views.CompanyList.as_view(), name='company-list'),
-    path('', RecipeModelList.as_view(), name="testmodel"),
+    # path('', RecipeModelList.as_view(), name="testmodel"),
     # path('company/add/', views.RecipeCreateView.as_view(), name='company-add'),
     path('company/add/', views.RecipeCreateView.as_view(), name='company-add'),
     path('testmodel', RecipeModelList.as_view(), name="testmodel"),
