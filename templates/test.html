@@ -4,63 +4,7 @@
 
 <title>{% block title %}Test{% endblock %}</title>
 
-@import {MDCFloatingLabel} from '@material/floating-label';
 
 {% block content %}
-
-<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--4-col">
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title">
-                      <h2 class="mdl-card__title-text">Welcome</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                            
-                        <form action="#">
-                                    <div class="mdl-textfield mdl-js-textfield">
-                                      <input class="mdl-textfield__input" type="text" id="sample1">
-                                      <label class="mdl-textfield__label" for="sample1">Text...</label>
-                                    </div>
-                                  </form>
-
-<!-- Numeric Textfield -->
-<form action="#">
-        <div class="mdl-textfield mdl-js-textfield">
-          <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample2">
-          <label class="mdl-textfield__label" for="sample2">Number...</label>
-          <span class="mdl-textfield__error">Input is not a number!</span>
-        </div>
-      </form>
-
-      <form action="#">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="sample3">
-              <label class="mdl-textfield__label" for="sample3">Text...</label>
-            </div>
-          </form>
-
-
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        Get Started
-                      </a>
-                    </div>
-                    <div class="mdl-card__menu">
-                      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                        <i class="material-icons">share</i>
-                      </button>
-                    </div>
-                  </div>
-        </div>
-    <div class="mdl-cell mdl-cell--6-col">6</div>
-    <div class="mdl-cell mdl-cell--2-col">2</div>
-</div>
-
-
-
-
-
-
 
 {% endblock %}

@@ -7,13 +7,14 @@
 {% endblock %}
 
 {% block extrahead %}
-    <!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> -->
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css">
+
+
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/1.10.19/sorting/intl.js"></script>
-    <script src="//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
     <script src="{% static 'assets/js/ddv_example_testmodel.js' %}"></script>
     <script type="text/javascript">
         var TESTMODEL_LIST_JSON_URL = "{% url 'testmodel_list_json' %}";
@@ -45,31 +46,23 @@
     </script>
 {% endblock %}
 
-
-{% block page_title %}Контакты и компании{% endblock %}
+<!-- MENU CONTENT -->
+{% block page_title %}Компании и контакты{% endblock %}
 {% block nav_button %}
-<a href="{% url 'company-add' %}">
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-        <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>Добавить компанию
-    </button>
+<a href="{% url 'company-add' %}" class="ui primary button">
+    <i class="icon plus"></i>
+    Добавить компанию
 </a>
 {% endblock %}
 
-
+<!-- MAIN CONTENT -->
 {% block content %}
-<div class="card shadow-sm mt-3">
-    <div class="card-header bg-primary text-white">
-        <b>Список организаций</b>
-    </div>
-    <div class="card-body">
-        <table class="datatable table table-striped table-bordered" style="width:100%">
-            <thead>
-                <th>{% trans "Название" %}</th>
-                <th>{% trans "Description" %}</th>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-</div>
+<table class="datatable ui celled table" style="width:100%">
+    <thead>
+        <th>{% trans "Название" %}</th>
+        <th>{% trans "Description" %}</th>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
 {% endblock %}
